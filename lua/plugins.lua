@@ -12,7 +12,7 @@ function M.setup()
   local conf = {
     profile = {
       enable = true,
-      threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+      threshold = 1, -- the amount in ms that a plugins load time must be over for it to be included in the profile
     },
 
     display = {
@@ -73,19 +73,81 @@ function M.setup()
       end,
     }
 
+    -- WhichKey
+    use {
+      "folke/which-key.nvim",
+      event = "VimEnter",
+      config = function()
+        require("config.whichkey").setup()
+      end,
+    }
 
-    -- -- WhichKey
-    -- use {
-    --   "folke/which-key.nvim",
-    --   config = function()
-    --     require("config.whichkey").setup()
-    --   end,
-    -- }
-    
-    -- You don't need to install this if you already have fzf installed
-    use { "junegunn/fzf", run = "./install --all" }
-    use { "junegunn/fzf.vim" }
-    
+    -- IndentLine
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      event = "BufReadPre",
+      config = function()
+        require("config.indentblankline").setup()
+      end,
+    }
+
+    -- Better icons
+    use {
+      "kyazdani42/nvim-web-devicons",
+      module = "nvim-web-devicons",
+      config = function()
+        require("nvim-web-devicons").setup { default = true }
+      end,
+    }
+
+    -- Better Comment
+    use {
+      "numToStr/Comment.nvim",
+      keys = { "gc", "gcc", "gbc" },
+      config = function()
+        require("Comment").setup {}
+      end,
+    }
+
+    -- Easy hopping
+    use {
+      "phaazon/hop.nvim",
+      cmd = { "HopWord", "HopChar1" },
+      config = function()
+        require("hop").setup {}
+      end,
+    }
+
+    -- Easy motion
+    use {
+      "ggandor/lightspeed.nvim",
+      keys = { "s", "S", "f", "F", "t", "T" },
+      config = function()
+        require("lightspeed").setup {}
+      end,
+    }
+
+    -- Markdown
+    use {
+      "iamcco/markdown-preview.nvim",
+      run = function()
+        vim.fn["mkdp#util#install"]()
+      end,
+      ft = "markdown",
+      cmd = { "MarkdownPreview" },
+    }
+
+    -- Status line
+    use {
+      "nvim-lualine/lualine.nvim",
+      event = "VimEnter",
+      config = function()
+        require("config.lualine").setup()
+      end,
+      wants = "nvim-web-devicons",
+      disable = true,
+    }
+    -- Bootstrap Neovim
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
       require("packer").sync()
@@ -100,5 +162,3 @@ function M.setup()
 end
 
 return M
-
-
