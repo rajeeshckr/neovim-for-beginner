@@ -60,6 +60,7 @@ function M.setup()
     -- Git
     use {
       "TimUntersberger/neogit",
+      cmd = "Neogit",
       requires = "nvim-lua/plenary.nvim",
       config = function()
         require("config.neogit").setup()
