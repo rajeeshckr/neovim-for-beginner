@@ -41,6 +41,9 @@ function M.setup()
   local function plugins(use)
     use { "wbthomason/packer.nvim" }
 
+    -- Load only when require
+    use { "nvim-lua/plenary.nvim", module = "plenary" }
+
     -- Colorscheme
     use {
       "sainnhe/everforest",
@@ -61,7 +64,6 @@ function M.setup()
     use {
       "TimUntersberger/neogit",
       cmd = "Neogit",
-      requires = "nvim-lua/plenary.nvim",
       config = function()
         require("config.neogit").setup()
       end,
