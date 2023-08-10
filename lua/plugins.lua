@@ -61,6 +61,19 @@ function M.setup()
       end,
     }
 
+
+    -- -- WhichKey
+    -- use {
+    --   "folke/which-key.nvim",
+    --   config = function()
+    --     require("config.whichkey").setup()
+    --   end,
+    -- }
+    
+    -- You don't need to install this if you already have fzf installed
+    use { "junegunn/fzf", run = "./install --all" }
+    use { "junegunn/fzf.vim" }
+    
     if packer_bootstrap then
       print "Restart Neovim required after installation!"
       require("packer").sync()
@@ -75,3 +88,5 @@ function M.setup()
 end
 
 return M
+
+

@@ -19,6 +19,10 @@ opt.smartcase = true -- Smart case
 opt.updatetime = 250 --Decrease update time
 opt.signcolumn = "yes" -- Always show sign column
 opt.clipboard = "unnamedplus" -- Access system clipboard
+opt.path:remove "/usr/include"
+opt.path:append "**"
+opt.wildignorecase = true
+
 
 -- Highlight on yank
 vim.cmd [[
